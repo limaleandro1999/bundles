@@ -8,8 +8,6 @@ services:
       - "1337:1337"
     links: 
       - postgres
-    # networks: 
-    #   - postgres
     volumes: 
       - ./bundles-api:/usr/bundles/api
 
@@ -24,13 +22,7 @@ services:
       - postgres:/data/postgres
     ports:
       - "5432:5432"
-    # networks:
-    #   - postgres
     restart: unless-stopped
-
-# networks:
-#   postgres:
-#     driver: bridge
 
 volumes:
     postgres:
