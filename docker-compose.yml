@@ -1,0 +1,36 @@
+version: '3.5'
+
+services: 
+  backend: 
+    build: ./bundles-api
+    command: yarn start
+    ports: 
+      - "1337:1337"
+    links: 
+      - postgres
+    # networks: 
+    #   - postgres
+    volumes: 
+      - ./bundles-api:/usr/bundles/api
+
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    # networks:
+    #   - postgres
+    restart: unless-stopped
+
+# networks:
+#   postgres:
+#     driver: bridge
+
+volumes:
+    postgres:
